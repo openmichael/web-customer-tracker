@@ -19,8 +19,14 @@ public class CustomerServiceImplement implements CustomerService {
 	@Override
 	@Transactional
 	public List<Customer> getCustomers() {
-		// TODO Auto-generated method stub
 		return customerDAO.getCustomers();
+	}
+
+	@Override
+	@Transactional
+	public void saveCustomer(Customer theCustomer) {
+		customerDAO.saveCustomer(theCustomer);
+		
 	}
 
 }
