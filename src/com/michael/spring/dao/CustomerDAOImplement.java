@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.michael.spring.entity.Customer;
 
@@ -42,7 +41,20 @@ public class CustomerDAOImplement implements CustomerDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		//Save the customer
-		currentSession.save(theCustomer);
+		//currentSession.save(theCustomer);
+		currentSession.saveOrUpdate(theCustomer);
+	}
+
+	@Override
+	public Customer getCustomer(int theId) {
+		
+		//Get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		//Retrieve from database using the primary key
+		Customer theCustomer = currentSession.get(Customer.class, theId);
+		
+		return theCustomer;
 	}
 
 }
